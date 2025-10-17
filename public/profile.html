@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Profile</title>
+<link rel="stylesheet" href="/public/css/style.css"/></head>
+<body>
+  <div class="container">
+    <header><h2>Profile</h2></header>
+    <div class="card" id="profileInfo">Loading…</div>
+  </div>
+  <script>
+    async function load(){ const r=await fetch('/api/user'); const j=await r.json(); const el=document.getElementById('profileInfo'); if(!j.logged){ el.innerHTML='Not signed in'; return;} el.innerHTML='<div><strong>'+j.name+'</strong></div><div class="muted">'+j.email+'</div><div>Provider: '+j.provider+'</div>'; }
+    load();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "rialo-builder-hub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev",
+    "build": "echo 'Static site - no build step'"
+  },
+  "dependencies": {}
+}

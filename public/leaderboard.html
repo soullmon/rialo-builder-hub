@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Leaderboard</title>
+<link rel="stylesheet" href="/public/css/style.css"/></head>
+<body>
+  <div class="container">
+    <header><h2>Leaderboard</h2><div class="muted">Top Builders</div></header>
+    <div id="list" class="card">Loading…</div>
+  </div>
+  <script>
+    async function load(){ const r=await fetch('/api/leaderboard'); const j=await r.json(); const el=document.getElementById('list'); if(!j || !j.length) { el.innerHTML='No data'; return;} el.innerHTML=''; j.forEach((p,i)=>{ const d=document.createElement('div'); d.style.marginBottom='8px'; d.innerHTML='<strong>#'+(i+1)+' '+p.name+'</strong> — posts: '+p.posts; el.appendChild(d); }); }
+    load();
+  </script>
+</body>
+</html>

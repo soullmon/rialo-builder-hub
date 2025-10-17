@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Rialo Builder Hub</title>
+  <link rel="stylesheet" href="/public/css/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Rialo Builder Hub</h1>
+        <div class="muted">AI × Web3 Builder Space</div>
+      </div>
+      <nav class="nav">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/profile">Profile</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <h2>Welcome</h2>
+      <p class="muted">Login with Discord or X (Twitter) to access Builder Room.</p>
+      <div style="margin-top:12px;">
+        <a id="discordBtn" class="btn" href="/api/auth/discord/start">Sign in with Discord</a>
+        <a id="xBtn" class="btn" href="/api/auth/x/start" style="margin-left:8px">Sign in with X</a>
+      </div>
+      <div id="status" class="muted" style="margin-top:12px"></div>
+    </section>
+
+    <section class="card" id="about">
+      <h3>About</h3>
+      <p class="muted">This is a deploy-ready scaffold. OAuth endpoints in <code>/api/auth</code> are placeholders — follow README to configure keys.</p>
+    </section>
+  </div>
+  <script>
+    // Simple status fetch
+    async function checkStatus(){
+      try{
+        const r = await fetch('/api/user');
+        const j = await r.json();
+        const s = document.getElementById('status');
+        if(j.logged) s.textContent = 'Signed in as ' + j.name;
+        else s.textContent = 'Not signed in';
+      }catch(e){
+        console.warn(e);
+      }
+    }
+    checkStatus();
+  </script>
+</body>
+</html>

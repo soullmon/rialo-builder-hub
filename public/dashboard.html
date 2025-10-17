@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Dashboard — Builder Hub</title>
+  <link rel="stylesheet" href="/public/css/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div><h2>Dashboard</h2><div class="muted">Your Builder Space</div></div>
+      <nav><a href="/">Home</a> <a href="/leaderboard">Leaderboard</a></nav>
+    </header>
+    <div class="card" id="profileCard">
+      <div id="content">Loading profile…</div>
+    </div>
+    <div class="card">
+      <h3>Quick actions</h3>
+      <button onclick="createAgent()">Create Agent</button>
+      <button onclick="publishMock()">Publish (mock)</button>
+    </div>
+  </div>
+  <script>
+    async function loadProfile(){
+      const r = await fetch('/api/user');
+      const j = await r.json();
+      const el = document.getElementById('content');
+      if(!j.logged){ el.innerHTML = '<div>Please <a href="/">sign in</a>.</div>'; return; }
+      el.innerHTML = '<div><strong>'+j.name+'</strong> ('+j.provider+')</div><div class="muted">'+j.email+'</div>';
+    }
+    function createAgent(){ alert('Create Agent - mock'); }
+    function publishMock(){ alert('Publish - mock'); }
+    loadProfile();
+  </script>
+</body>
+</html>
